@@ -16,8 +16,9 @@
   ![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)
   ## Instalation Instuctions: 
   Clone the repo and Initiate all dependencies. Start app by typeing 'node index' into command prompt
+  Link to video walkthrough: https://screenrec.com/share/s3JUWZ2B4f
   ## Contributors: 
   
   ## Questions:
-  - [Link to Github Profile](steffen568)
+  - [Link to Github Profile](https://github.com/steffen568)
   - [Please Contact My Email For Questions](sgonzalez568@gmail.com)
