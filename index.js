@@ -2,6 +2,7 @@ const inquirer = require('inquirer')
 const mysql = require('mysql2')
 const conTable = require('console.table')
 const db = require('./config/connection')
+const { profileEnd } = require('console')
 
 
 // Connect to sql database, then promp main menu
@@ -96,4 +97,106 @@ const employees = () => {
         mainMenue()
         }
     )
+}
+
+const addDepartment = () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'newDepartment',
+            message: 'Please enter new daprtment'
+        }
+    ])
+    .then(input => {
+        db.query(
+            'INSERT INTO departments (department_name) VALUES (?)',
+            [input.newDepartment],
+            function (err, res) {
+                if (err) throw err
+                console.log(`
+                =======================
+                    DEPARTMENT ADDED
+                =======================
+                `)
+                mainMenue()
+            }
+        )
+    })
+}
+
+const addPosition = () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'newPosition',
+            message: 'Please enter new poisiton title'
+        },
+        {
+            tpye: 'input',
+            name: 'newSalary',
+            message: 'Please enter salary for new position'
+        },
+        {
+            type: 'input',
+            name: 'newDepId',
+            message: 'Please eneter the department id'
+        }
+    ])
+    .then(input => {
+        db.query(
+            'INSERT INTO positions (title, salary, department_id) VALUES (?, ?, ?)',
+            [input.newPosition, input.newSalary, input.newDepId],
+            function (err, res) {
+                if (err) throw err
+                console.log(`
+                    =========================
+                        NEW POSITION ADDED
+                    =========================    
+                    `
+                )
+                mainMenue()
+            }
+        )
+    })
+}
+
+const addEmployee = () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'newFirst',
+            message: 'Please enter first name of employee'
+        },
+        {
+            type: 'input',
+            name: 'newLast',
+            message: 'Please enter last name of employee'
+        },
+        {
+            type: 'input',
+            name: 'newId',
+            message: 'Please enter position id'
+        },
+        {
+            type: 'input',
+            name: 'manId',
+            message: 'Please enter manager id'
+        } 
+    ])
+    .then(input => {
+        db.query(
+            'INSERT INTO employees (first_name, last_name, position_id, manager_id) VALUES (?, ?, ?, ?)',
+            [input.newFirst, input.newLast, input.newId, input.manId],
+            function (err, res) {
+                if (err) throw err
+                console.log(`
+                =========================
+                    NEW EMPLOYEE ADDED
+                =========================
+                `
+                )
+                mainMenue()
+            }
+        )
+    })
 }
