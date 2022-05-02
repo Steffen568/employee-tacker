@@ -28,7 +28,7 @@ const mainMenue = () => {
             'Add Department to database',
             'Add Position to database',
             'Add Employee to database',
-            'Updata Employee',
+            'Update Employee',
             'Exit'
         ]
     })
@@ -195,6 +195,36 @@ const addEmployee = () => {
                 =========================
                 `
                 )
+                mainMenue()
+            }
+        )
+    })
+}
+
+const updateEmployee = () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'id',
+            message: 'Please Enter employee id'
+        },
+        {
+            type: 'input',
+            name: 'newEmpId',
+            message: 'Please enter new employee id'
+        }
+    ])
+    .then(input => {
+        db.query(
+            'UPDATE employees SET position_id=? WHERE id=?',
+            [input.newEmpId, input.id],
+            function (err, res) {
+                if (err) throw err
+                console.log(`
+                =======================
+                    EMPLOYEE UPDATED
+                =======================
+                `)
                 mainMenue()
             }
         )
